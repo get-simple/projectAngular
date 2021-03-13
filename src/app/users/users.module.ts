@@ -1,9 +1,9 @@
+import { VMessageModule } from './../shared/vmessage/vmessage.module';
 
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -12,10 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    VMessageModule
   ],
   exports: [
-    UsersComponent
+    UsersComponent,
   ]
 })
 export class UsersModule{}
