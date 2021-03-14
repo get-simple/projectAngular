@@ -1,3 +1,4 @@
+import { CoreModule } from './core/core.module';
 import { UsersModule } from './users/users.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule,
     UsersModule,
-
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

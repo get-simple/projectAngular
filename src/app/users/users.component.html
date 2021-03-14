@@ -1,25 +1,50 @@
-<div class="p-5 mb-2 bg-dark text-white-50 bg-dark">
-  <div class="container mt-5">
-    <form #form="ngForm" [formGroup]="userForm">
+<body class="p-5 mb-2 bg-dark text-white-50 bg-dark">
 
-      <div class="form-group">
-        <label for="login" class="font-weight-bolder text-uppercase text-monospace">Login</label>
-        <input type="text" id="login" class="form-control" formControlName="login">
-        <app-vmessage *ngIf="userForm.get('login')?.errors?.required" text="Login is required!"></app-vmessage>
-      </div>
-
-      <div class="form-group">
-        <label for="password" class="font-weight-bolder text-uppercase text-monospace">Password</label>
-        <input type="password" id="password" class="form-control" formControlName="password">
-        <app-vmessage *ngIf="userForm.get('password')?.errors?.required" text="Password is required!"></app-vmessage>
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword" class="font-weight-bolder text-uppercase text-monospace">Confirm password</label>
-        <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
-        <app-vmessage *ngIf="userForm.get('confirmPassword')?.errors?.required" text="Confirm password is required!"></app-vmessage>
-      </div>
-
-    </form>
+  <div>
+    <h1 class="ml-3">Registro de usuário <mat-icon>person_add</mat-icon></h1>
   </div>
-</div>
+
+  <div [formGroup]="userForm" class="container mt-5">
+
+    <div>
+      <mat-form-field appearance="fill">
+        <label for="login">Login</label>
+        <input matInput formControlName="login" id="login" type="text" required>
+        <mat-icon matSuffix *ngIf="userForm.get('login')?.errors" class="text-danger">sentiment_very_dissatisfied</mat-icon>
+        <mat-icon matSuffix *ngIf="!userForm.get('login')?.errors?.required && !userForm.get('login')?.errors?.pattern && !userForm.get('login')?.errors?.usernameTaken" class="text-success">sentiment_very_satisfied</mat-icon>
+        <mat-hint *ngIf="userForm.get('login')?.errors?.required" class="text-danger">Login is required</mat-hint>
+        <mat-hint *ngIf="userForm.get('login')?.errors?.pattern" class="text-danger">Must be lowercase</mat-hint>
+        <mat-hint *ngIf="userForm.get('login')?.errors?.usernameTaken" class="text-danger">Username alread exist</mat-hint>
+        <mat-hint *ngIf="!userForm.get('login')?.errors" class="text-success">Good job!</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+      <mat-form-field appearance="fill">
+        <label for="password">Password</label>
+        <input matInput formControlName="password" id="password" type="password" required>
+        <mat-icon matSuffix *ngIf="userForm.get('password')?.errors?.required" class="text-danger">lock_open</mat-icon>
+        <mat-icon matSuffix *ngIf="!userForm.get('password')?.errors?.required" class="text-success">lock</mat-icon>
+        <mat-hint *ngIf="userForm.get('password')?.errors?.required" class="text-danger">Password is required</mat-hint>
+        <mat-hint *ngIf="!userForm.get('password')?.errors?.required" class="text-success">You are safe now!</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-4">
+      <mat-form-field appearance="fill">
+        <label for="confirmPassword">Confirm password</label>
+        <input matInput formControlName="confirmPassword" id="confirmPassword" type="password" required>
+        <mat-icon matSuffix *ngIf="userForm.get('confirmPassword')?.errors?.required || userForm.get('confirmPassword')?.value != userForm.get('password')?.value" class="text-danger">lock_open</mat-icon>
+        <mat-icon matSuffix *ngIf="!userForm.get('confirmPassword')?.errors?.required && userForm.get('confirmPassword')?.value != '' && userForm.get('confirmPassword')?.value == userForm.get('password')?.value" class="text-success">lock</mat-icon>
+        <mat-hint *ngIf="userForm.get('confirmPassword')?.errors?.required" class="text-danger">Confirm password is required</mat-hint>
+        <mat-hint *ngIf="userForm.get('confirmPassword')?.value != '' && userForm.get('confirmPassword')?.value != userForm.get('password')?.value" class="text-danger">Passwords don't match!</mat-hint>
+        <mat-hint *ngIf="!userForm.get('confirmPassword')?.errors?.required && userForm.get('confirmPassword')?.value != '' && userForm.get('confirmPassword')?.value == userForm.get('password')?.value" class="text-success">Great!</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-3">
+      <button mat-raised-button color="primary" (click)="registerNewUser()" [disabled]="userForm.invalid || userForm.get('confirmPassword')?.value == '' ||userForm.get('confirmPassword')?.value != userForm.get('password')?.value">Sing up</button>
+    </div>
+
+  </div>
+</body>
