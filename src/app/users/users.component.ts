@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      login: ['', Validators.required],
+      login: ['', [Validators.required, Validators.pattern(/^[a-z0-9_\-]+$/)]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
