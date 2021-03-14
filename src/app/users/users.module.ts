@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { VMessageModule } from './../shared/vmessage/vmessage.module';
 
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,7 @@ import { UsersComponent } from './users.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
     VMessageModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    HttpClientModule
   ],
   exports: [
     UsersComponent,
